@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'physics_test.dart';
+import 'color_state_changer.dart';
 
-void main() => runApp(MyApp());
+// void main() => runApp(MaterialApp(home: MyApp()));
+
+// main() { runApp(MaterialApp(home: MyApp())); }
+main() {
+  runApp(MaterialApp(home: ColorStateChanger()));
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -16,10 +23,19 @@ class MyApp extends StatelessWidget {
           title: Text('Welszcome to Flutter'),
         ),
         body: Center(
-          child: RandomWords(),
+          child: GreenFrog(),
         ),
       ),
     );
+  }
+}
+
+class GreenFrog extends StatelessWidget {
+  const GreenFrog({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(color: const Color(0xFF2DBD3A));
   }
 }
 
@@ -32,10 +48,10 @@ class RandomWords extends StatefulWidget {
   RandomWordsState createState() => RandomWordsState();
 }
 
-TextStyle getTextStyle() {
-  return TextStyle(
-      fontWeight: FontWeight.w900, fontStyle: FontStyle.italic, fontSize: 18.0);
-}
+// TextStyle getTextStyle() {
+//   return TextStyle(
+//       fontWeight: FontWeight.w900, fontStyle: FontStyle.italic, fontSize: 18.0);
+// }
 
 class RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
@@ -48,7 +64,12 @@ class RandomWordsState extends State<RandomWords> {
       leading: FlutterLogo(),
       title: Text(
         pair.asPascalCase,
-        style: getTextStyle(),
+        style: () {
+          return TextStyle(
+              fontWeight: FontWeight.w900,
+              fontStyle: FontStyle.italic,
+              fontSize: 18.0);
+        }(),
         // style: TextStyle(
         //     fontWeight: FontWeight.bold,
         //     fontStyle: FontStyle.italic,
@@ -94,7 +115,12 @@ class RandomWordsState extends State<RandomWords> {
               return ListTile(
                 title: Text(
                   pair.asPascalCase,
-                  style: getTextStyle(),
+                  style: () {
+                    return TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 8.0);
+                  }(),
                 ),
               );
             },
